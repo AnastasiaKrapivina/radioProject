@@ -1,91 +1,71 @@
 package ru.netology.project;
 
 public class Radio {
-    public int currentRadioStationNumber;
-    public int soundVolume;
+    private int radioStationNumber;
+    private int soundVolume;
 
     public int getRadioStationNumber() {
-        return currentRadioStationNumber;
-    }
-
-    public int getNext() {
-        return currentRadioStationNumber;
-    }
-
-    public int getPrev() {
-        return currentRadioStationNumber;
-    }
-
-    public void setRadioStationNumber(int i) {
-        if (i < 0) {
-            return;
-        }
-        if (i > 9) {
-            return;
-        }
-        currentRadioStationNumber = i;
-    }
-
-    public int setNext(int i) {
-        if (i < 9) {
-            currentRadioStationNumber = i + 1;
-        }
-        if (i == 9) {
-            currentRadioStationNumber = 0;
-        }
-        return currentRadioStationNumber;
-    }
-
-    public int setPrev(int i) {
-        if (i > 0) {
-            currentRadioStationNumber = i - 1;
-        }
-        if (i == 0) {
-            currentRadioStationNumber = 9;
-        }
-        return currentRadioStationNumber;
+        return radioStationNumber;
     }
 
     public int getVolume() {
         return soundVolume;
     }
 
-    public int getNextVolume() {
-        return soundVolume;
+    public void setRadioStationNumber(int newRadioStationNumber) {
+
+        radioStationNumber = newRadioStationNumber;
     }
 
-    public int getPrevVolume() {
-        return soundVolume;
-    }
-
-    public void setVolume(int i) {
-        if (i < 0) {
+    public void setRandomRadioStationNumber(int newRadioStationNumber) {
+        if (newRadioStationNumber < 0) {
             return;
         }
-        if (i > 100) {
+        if (newRadioStationNumber > 9) {
             return;
         }
-        soundVolume = i;
+        setRadioStationNumber(newRadioStationNumber);
     }
 
-    public int setNextVolume(int i) {
-        if (i < 100) {
-            soundVolume = i + 1;
+    public void setNext() {
+        int newRadioStationNumber = radioStationNumber + 1;
+        if (newRadioStationNumber > 9) {
+            setRadioStationNumber(0);
+        } else {
+            setRadioStationNumber(newRadioStationNumber);
         }
-        if (i >= 100) {
-            soundVolume = 100;
-        }
-        return soundVolume;
     }
 
-    public int setPrevVolume(int i) {
-        if (i > 0) {
-            soundVolume = i - 1;
+    public void setPrev() {
+        int newRadioStationNumber = radioStationNumber - 1;
+        if (newRadioStationNumber < 0) {
+            setRadioStationNumber(9);
+        } else {
+            setRadioStationNumber(newRadioStationNumber);
         }
-        if (i == 0) {
-            soundVolume = 0;
+    }
+
+    public void setVolume(int newSoundVolume) {
+
+        soundVolume = newSoundVolume;
+    }
+
+    public void setNextVolume() {
+        int newSoundVolume = soundVolume + 1;
+        if (newSoundVolume > 100) {
+            setVolume(100);
+        } else {
+            setVolume(newSoundVolume);
         }
-        return soundVolume;
+    }
+
+    public void setPrevVolume() {
+        int newSoundVolume = soundVolume - 1;
+        if (newSoundVolume < 0) {
+            setVolume(0);
+        } else {
+            setVolume(newSoundVolume);
+        }
     }
 }
 
