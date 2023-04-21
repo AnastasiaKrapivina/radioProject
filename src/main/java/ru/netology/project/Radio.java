@@ -10,21 +10,25 @@ public class Radio {
     private int soundVolume;
 
     public Radio(int quantityRadioStationNumber) {
-        this.maxRadioStationNumber = quantityRadioStationNumber -1;
+        this.maxRadioStationNumber = quantityRadioStationNumber - 1;
         this.quantityRadioStationNumber = quantityRadioStationNumber;
-       }
+    }
+
     public Radio() {
     }
 
     public int getMaxRadioStationNumber() {
         return maxRadioStationNumber;
     }
+
     public int getQuantityRadioStationNumber() {
         return quantityRadioStationNumber;
     }
+
     public int getMinRadioStationNumber() {
         return minRadioStationNumber;
     }
+
     public int getRadioStationNumber() {
         return radioStationNumber;
     }
