@@ -1,9 +1,30 @@
 package ru.netology.project;
 
 public class Radio {
+    private int quantityRadioStationNumber = 10;
+    private int maxRadioStationNumber = 9;
+    private int minRadioStationNumber = 0;
     private int radioStationNumber;
+
+
     private int soundVolume;
 
+    public Radio(int quantityRadioStationNumber) {
+        this.maxRadioStationNumber = quantityRadioStationNumber -1;
+        this.quantityRadioStationNumber = quantityRadioStationNumber;
+       }
+    public Radio() {
+    }
+
+    public int getMaxRadioStationNumber() {
+        return maxRadioStationNumber;
+    }
+    public int getQuantityRadioStationNumber() {
+        return quantityRadioStationNumber;
+    }
+    public int getMinRadioStationNumber() {
+        return minRadioStationNumber;
+    }
     public int getRadioStationNumber() {
         return radioStationNumber;
     }
@@ -18,10 +39,10 @@ public class Radio {
     }
 
     public void setRandomRadioStationNumber(int newRadioStationNumber) {
-        if (newRadioStationNumber < 0) {
+        if (newRadioStationNumber < minRadioStationNumber) {
             return;
         }
-        if (newRadioStationNumber > 9) {
+        if (newRadioStationNumber > maxRadioStationNumber) {
             return;
         }
         setRadioStationNumber(newRadioStationNumber);
@@ -29,8 +50,8 @@ public class Radio {
 
     public void setNext() {
         int newRadioStationNumber = radioStationNumber + 1;
-        if (newRadioStationNumber > 9) {
-            setRadioStationNumber(0);
+        if (newRadioStationNumber > maxRadioStationNumber) {
+            setRadioStationNumber(minRadioStationNumber);
         } else {
             setRadioStationNumber(newRadioStationNumber);
         }
@@ -38,8 +59,8 @@ public class Radio {
 
     public void setPrev() {
         int newRadioStationNumber = radioStationNumber - 1;
-        if (newRadioStationNumber < 0) {
-            setRadioStationNumber(9);
+        if (newRadioStationNumber < minRadioStationNumber) {
+            setRadioStationNumber(maxRadioStationNumber);
         } else {
             setRadioStationNumber(newRadioStationNumber);
         }
