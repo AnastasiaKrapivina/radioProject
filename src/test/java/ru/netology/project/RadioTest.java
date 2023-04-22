@@ -11,24 +11,34 @@ class RadioTest {
     public void testRadioStationNumberOneConstructor() {
         Radio rad = new Radio();
 
+        rad.setQuantityRadioStationNumber(9);
+        rad.setMaxRadioStationNumber(8);
+        rad.setMinRadioStationNumber(2);
         rad.setRadioStationNumber(4);
+        rad.setSoundVolume(80);
 
+        Assertions.assertEquals(9, rad.getQuantityRadioStationNumber());
+        Assertions.assertEquals(8, rad.getMaxRadioStationNumber());
+        Assertions.assertEquals(2, rad.getMinRadioStationNumber());
         Assertions.assertEquals(4, rad.getRadioStationNumber());
-        Assertions.assertEquals(9, rad.getMaxRadioStationNumber());
-        Assertions.assertEquals(0, rad.getMinRadioStationNumber());
-        Assertions.assertEquals(10, rad.getQuantityRadioStationNumber());
+        Assertions.assertEquals(80, rad.getSoundVolume());
     }
 
     @Test
     public void testRadioStationNumberTwoConstructor() {
-        Radio rad = new Radio(20);
+        Radio rad = new Radio(20, 19, 0, 4, 0);
 
+        rad.setQuantityRadioStationNumber(24);
+        rad.setMaxRadioStationNumber(23);
+        rad.setMinRadioStationNumber(2);
         rad.setRadioStationNumber(4);
+        rad.setSoundVolume(80);
 
+        Assertions.assertEquals(24, rad.getQuantityRadioStationNumber());
+        Assertions.assertEquals(23, rad.getMaxRadioStationNumber());
+        Assertions.assertEquals(2, rad.getMinRadioStationNumber());
         Assertions.assertEquals(4, rad.getRadioStationNumber());
-        Assertions.assertEquals(19, rad.getMaxRadioStationNumber());
-        Assertions.assertEquals(0, rad.getMinRadioStationNumber());
-        Assertions.assertEquals(20, rad.getQuantityRadioStationNumber());
+        Assertions.assertEquals(80, rad.getSoundVolume());
     }
 
     @Test
@@ -45,9 +55,7 @@ class RadioTest {
 
     @Test
     public void testRandomRadioStationNumberTwoConstructor() {
-        Radio rad = new Radio(20);
-
-        rad.setRandomRadioStationNumber(18);
+        Radio rad = new Radio(20, 19, 0, 18, 0);
 
         int expected = 18;
         int actual = rad.getRadioStationNumber();
@@ -69,7 +77,7 @@ class RadioTest {
 
     @Test
     public void testRadioRandomNumberMinBorderTwoConstructor() {
-        Radio rad = new Radio(20);
+        Radio rad = new Radio(20, 19, 0, 0, 0);
 
         rad.setRandomRadioStationNumber(-1);
 
@@ -93,7 +101,7 @@ class RadioTest {
 
     @Test
     public void testRandomNumberMaxBorderTwoConstructor() {
-        Radio rad = new Radio(15);
+        Radio rad = new Radio(15, 14, 0, 0, 0);
 
         rad.setRandomRadioStationNumber(15);
 
@@ -108,25 +116,22 @@ class RadioTest {
         Radio rad = new Radio();
 
         rad.setRadioStationNumber(8);
+        rad.setSoundVolume(80);
         rad.setNext();
 
-        int expected = 9;
-        int actual = rad.getRadioStationNumber();
 
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(9, rad.getRadioStationNumber());
+        Assertions.assertEquals(81, rad.getSoundVolume());
     }
 
     @Test
     public void testNextNumberTwoConstructor() {
-        Radio rad = new Radio(25);
+        Radio rad = new Radio(25, 24, 0, 18, 80);
 
-        rad.setRadioStationNumber(18);
         rad.setNext();
 
-        int expected = 19;
-        int actual = rad.getRadioStationNumber();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(19, rad.getRadioStationNumber());
+        Assertions.assertEquals(81, rad.getSoundVolume());
     }
 
     @Test
@@ -134,51 +139,46 @@ class RadioTest {
         Radio rad = new Radio();
 
         rad.setRadioStationNumber(9);
+        rad.setSoundVolume(100);
         rad.setNext();
 
-        int expected = 0;
-        int actual = rad.getRadioStationNumber();
 
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(0, rad.getRadioStationNumber());
+        Assertions.assertEquals(100, rad.getSoundVolume());
     }
 
     @Test
     public void testNextMaxBorderTwoConstructor() {
-        Radio rad = new Radio(25);
+        Radio rad = new Radio(25, 24, 0, 24, 100);
 
-        rad.setRadioStationNumber(24);
         rad.setNext();
 
-        int expected = 0;
-        int actual = rad.getRadioStationNumber();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(0, rad.getRadioStationNumber());
+        Assertions.assertEquals(100, rad.getSoundVolume());
     }
 
     @Test
-    public void testPrevNumberOneConstructor() {
+    public void testPrevOneConstructor() {
         Radio rad = new Radio();
 
         rad.setRadioStationNumber(8);
+        rad.setSoundVolume(80);
         rad.setPrev();
 
-        int expected = 7;
-        int actual = rad.getRadioStationNumber();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(7, rad.getRadioStationNumber());
+        Assertions.assertEquals(79, rad.getSoundVolume());
+        ;
     }
 
     @Test
-    public void testPrevNumberTwoConstructor() {
-        Radio rad = new Radio(20);
+    public void testPrevTwoConstructor() {
+        Radio rad = new Radio(20, 19, 0, 18, 80);
 
-        rad.setRadioStationNumber(18);
         rad.setPrev();
 
-        int expected = 17;
-        int actual = rad.getRadioStationNumber();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(17, rad.getRadioStationNumber());
+        Assertions.assertEquals(79, rad.getSoundVolume());
+        ;
     }
 
     @Test
@@ -186,89 +186,21 @@ class RadioTest {
         Radio rad = new Radio();
 
         rad.setRadioStationNumber(0);
+
         rad.setPrev();
 
-        int expected = 9;
-        int actual = rad.getRadioStationNumber();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(9, rad.getRadioStationNumber());
+        Assertions.assertEquals(0, rad.getSoundVolume());
     }
 
     @Test
     public void testPrevMinBorderTwoConstructor() {
-        Radio rad = new Radio(17);
+        Radio rad = new Radio(17, 16, 0, 0, 0);
 
-        rad.setRadioStationNumber(0);
         rad.setPrev();
 
-        int expected = 16;
-        int actual = rad.getRadioStationNumber();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testVolume() {
-        Radio rad = new Radio();
-
-        rad.setVolume(80);
-
-        int expected = 80;
-        int actual = rad.getVolume();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testNextVolume() {
-        Radio rad = new Radio();
-
-        rad.setVolume(80);
-        rad.setNextVolume();
-
-        int expected = 81;
-        int actual = rad.getVolume();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testNextVolumeMaxBorder() {
-        Radio rad = new Radio();
-
-        rad.setVolume(100);
-        rad.setNextVolume();
-
-        int expected = 100;
-        int actual = rad.getVolume();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testPrevVolume() {
-        Radio rad = new Radio();
-
-        rad.setVolume(80);
-        rad.setPrevVolume();
-
-        int expected = 79;
-        int actual = rad.getVolume();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testPrevVolumeMinBorder() {
-        Radio rad = new Radio();
-
-        rad.setVolume(0);
-        rad.setPrevVolume();
-
-        int expected = 0;
-        int actual = rad.getVolume();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(16, rad.getRadioStationNumber());
+        Assertions.assertEquals(0, rad.getSoundVolume());
     }
 
 }
