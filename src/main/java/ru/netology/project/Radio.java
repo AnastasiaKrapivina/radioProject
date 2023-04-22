@@ -1,27 +1,25 @@
 package ru.netology.project;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+
 public class Radio {
+    private int quantityRadioStationNumber = 10;
+    private int maxRadioStationNumber = quantityRadioStationNumber - 1;
+    private int minRadioStationNumber = 0;
     private int radioStationNumber;
     private int soundVolume;
 
-    public int getRadioStationNumber() {
-        return radioStationNumber;
-    }
-
-    public int getVolume() {
-        return soundVolume;
-    }
-
-    public void setRadioStationNumber(int newRadioStationNumber) {
-
-        radioStationNumber = newRadioStationNumber;
-    }
-
     public void setRandomRadioStationNumber(int newRadioStationNumber) {
-        if (newRadioStationNumber < 0) {
+        if (newRadioStationNumber < minRadioStationNumber) {
             return;
         }
-        if (newRadioStationNumber > 9) {
+        if (newRadioStationNumber > maxRadioStationNumber) {
             return;
         }
         setRadioStationNumber(newRadioStationNumber);
@@ -29,43 +27,33 @@ public class Radio {
 
     public void setNext() {
         int newRadioStationNumber = radioStationNumber + 1;
-        if (newRadioStationNumber > 9) {
-            setRadioStationNumber(0);
+        int newSoundVolume = soundVolume + 1;
+        if (newRadioStationNumber > maxRadioStationNumber) {
+            setRadioStationNumber(minRadioStationNumber);
         } else {
             setRadioStationNumber(newRadioStationNumber);
+        }
+        if (newSoundVolume > 100) {
+            setSoundVolume(100);
+        } else {
+            setSoundVolume(newSoundVolume);
         }
     }
 
     public void setPrev() {
         int newRadioStationNumber = radioStationNumber - 1;
-        if (newRadioStationNumber < 0) {
-            setRadioStationNumber(9);
+        int newSoundVolume = soundVolume - 1;
+        if (newRadioStationNumber < minRadioStationNumber) {
+            setRadioStationNumber(maxRadioStationNumber);
         } else {
             setRadioStationNumber(newRadioStationNumber);
         }
-    }
-
-    public void setVolume(int newSoundVolume) {
-
-        soundVolume = newSoundVolume;
-    }
-
-    public void setNextVolume() {
-        int newSoundVolume = soundVolume + 1;
-        if (newSoundVolume > 100) {
-            setVolume(100);
-        } else {
-            setVolume(newSoundVolume);
-        }
-    }
-
-    public void setPrevVolume() {
-        int newSoundVolume = soundVolume - 1;
         if (newSoundVolume < 0) {
-            setVolume(0);
+            setSoundVolume(0);
         } else {
-            setVolume(newSoundVolume);
+            setSoundVolume(newSoundVolume);
         }
+
     }
 }
 
